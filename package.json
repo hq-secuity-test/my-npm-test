@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/hq-secuity-test/my-npm-test/issues"
   },
-  "homepage": "https://github.com/hq-secuity-test/my-npm-test#readme"
+  "homepage": "https://github.com/hq-secuity-test/my-npm-test#readme",
+  "dependencies": {
+    "extjs-gpl": "^6.2.0"
+  }
 }
