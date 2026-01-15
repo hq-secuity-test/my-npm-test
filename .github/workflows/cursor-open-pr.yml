@@ -1,10 +1,11 @@
 name: Cursor: apply changes and open PR
 
 on:
-  workflow_dispatch: {}   # run manually from the Actions tab
-  # optional: run nightly
-  # schedule:
-  #   - cron: "0 9 * * *"
+  workflow_dispatch:
+    inputs:
+      port_context:
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -13,8 +14,10 @@ permissions:
 jobs:
   cursor_fix_and_pr:
     runs-on: ubuntu-latest
-
     steps:
+      - name: Print run id
+        run: echo "Port run id is ${{ fromJson(inputs.port_context).runId }}"
+
       - name: Checkout
         uses: actions/checkout@v4
 
