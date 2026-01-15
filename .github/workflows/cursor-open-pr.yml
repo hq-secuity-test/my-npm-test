@@ -20,10 +20,17 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+            
+      - name: Checkout Private Shared Action
+        uses: actions/checkout@v4
+        with:
+          repository: hq-secuity-test/org-shared-actions
+          token: ${{ secrets.PRIVATE_ACTION_TOKEN }}
+          path: .github/shared-actions  # Downloads it to this folder
 
       # ✅ Use the shared action from ANOTHER repo:
       - name: Run Cursor shared action
-        uses: hq-secuity-test/org-shared-actions/.github/actions/cursor-agent-fix@main
+        uses: ./.github/shared-actions/.github/actions/cursor-agent-fix
         with:
           api_key: ${{ secrets.CURSOR_API_KEY }}
           model: auto
