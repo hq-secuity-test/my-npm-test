@@ -23,7 +23,7 @@ jobs:
 
       # ✅ Use the shared action from ANOTHER repo:
       - name: Run Cursor shared action
-        uses: hq-secuity-test/org-shared-actions/cursor-actions/.github/actions/cursor-agent-fix@v1
+        uses: hq-secuity-test/org-shared-actions/cursor-actions/.github/actions/cursor-agent-fix@v1.1
         with:
           api_key: ${{ secrets.CURSOR_API_KEY }}
           model: auto
