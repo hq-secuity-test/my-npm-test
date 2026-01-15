@@ -1,0 +1,46 @@
+name: Cursor: apply changes and open PR
+
+on:
+  workflow_dispatch: {}   # run manually from the Actions tab
+  # optional: run nightly
+  # schedule:
+  #   - cron: "0 9 * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  cursor_fix_and_pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ✅ Use the shared action from ANOTHER repo:
+      - name: Run Cursor shared action
+        uses: hq-secuity-test/org-shared-actions/cursor-actions/.github/actions/cursor-agent-fix@v1
+        with:
+          api_key: ${{ secrets.CURSOR_API_KEY }}
+          model: auto
+          prompt: |
+            Review the README.md and identify a good template based on 
+            the current repository. Ensuring you follow good practices for
+            documentatioms 
+
+      # ✅ Create a PR if there are changes
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: cursor/auto-fixes
+          delete-branch: true
+          commit-message: "chore: cursor automated changes"
+          title: "Cursor: automated changes"
+          body: |
+            This PR was created automatically by Cursor via GitHub Actions.
+
+            Cursor summary:
+            - See `cursor_summary.md` in this branch for details.
+
