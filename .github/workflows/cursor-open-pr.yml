@@ -1,4 +1,4 @@
-name: Cursor: apply changes and open PR
+name: apply changes and open PR
 
 on:
   workflow_dispatch:
